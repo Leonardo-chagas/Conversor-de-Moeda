@@ -1,12 +1,12 @@
+from logging import root
 from kivy.uix.label import Label
 from kivy.uix.behaviors.button import ButtonBehavior
+from kivy.uix.textinput import TextInput
 from kivy.uix.dropdown import DropDown
 from kivy.uix.image import Image
 from kivy.uix.button import Button
 from kivy.graphics import Color, Ellipse, Rectangle
 from kivy.properties import ListProperty
-import requests
-
 
 class DropdownButton(ButtonBehavior, Label):
     currencies = []
@@ -56,7 +56,16 @@ class DropdownButton(ButtonBehavior, Label):
         self.dropdown.open(self)
 
 
-class Botao(ButtonBehavior):
+class Input(TextInput):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.text = '0,00'
+    
+    def on_text(self, *args):
+        x = 5
+
+
+class Botao(ButtonBehavior, Label):
     cor1 = ListProperty([0.1, 0.5, 0.7, 1])
     cor2 = ListProperty([0, 0.1, 0.3, 1])
 

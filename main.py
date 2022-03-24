@@ -7,7 +7,9 @@ import requests
 key = '68480ca7c26cbc361957e9a6'
 
 class Gerenciador(BoxLayout):
-    pass
+    def press(self):
+        req = requests.get('https://v6.exchangerate-api.com/v6/'+key+'/latest/'+self.ids.moedade.codigo)
+        print(req.text)
 
 class Aplicativo(App):
     def build(self):

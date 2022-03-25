@@ -8,15 +8,17 @@ from kivy.uix.button import Button
 from kivy.graphics import Color, Ellipse, Rectangle
 from kivy.properties import ListProperty
 
+class CustomDropdown(DropDown):
+    pass
+
 class DropdownButton(ButtonBehavior, Label):
-    currencies = []
-    dropdown = DropDown()
     cor1 = ListProperty([0.1, 0.5, 0.7, 1])
     cor2 = ListProperty([0, 0.1, 0.3, 1])
-    codigo = ''
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        self.dropdown = CustomDropdown()
+        self.currencies = []
         with open('moedas.txt', encoding="utf8") as f:
             for line in f:
                 content = line.split(' ')
@@ -42,15 +44,14 @@ class DropdownButton(ButtonBehavior, Label):
 
     def AtualizarLista(self, *args):
         for option in self.currencies:
-            botao = Button(text=option['name'], size_hint_y=None, size=(30, 20))
-            botao.bind(on_release=lambda x: self.Selecionar(option['code'], option['name']))
+            botao = Button(text=option['name'], size_hint_y=None, size=(30, 15))
+            botao.bind(on_release=lambda botao: self.Selecionar(botao.text))
             self.dropdown.add_widget(botao)
+        #self.dropdown.bind(on_select = lambda instance, x: self.Selecionar(x['code'], x['name']))
 
-    def Selecionar(self, code, name, *args):
+    def Selecionar(self, name, *args):
         self.dropdown.dismiss()
         self.text = name
-        self.codigo = code
-        print(name)
 
     def on_release(self, *args):
         self.dropdown.open(self)
@@ -59,10 +60,9 @@ class DropdownButton(ButtonBehavior, Label):
 class Input(TextInput):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.text = '0,00'
     
-    def on_text(self, *args):
-        x = 5
+    def on_text(self, instance, value):
+        self.text = value
 
 
 class Botao(ButtonBehavior, Label):

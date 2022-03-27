@@ -27,10 +27,17 @@
                     Color:
                         rgba:1,0,0,1
                 Label:
+                    id:errode
+                    text:''
+                    size_hint_y:0.4
+                    padding_y:30
+                Label:
                     text:'De:'
                     font_size:'20sp'
+                    size_hint_y:0.7
                 DropdownButton:
                     text:'Selecionar moeda para ser convertida'
+                    font_size:'16sp'
                     id:moedade
             BoxLayout:
                 orientation:'vertical'
@@ -38,10 +45,17 @@
                 height: 300
                 padding: 40,40,40,40
                 Label:
+                    id:erropara
+                    text:''
+                    size_hint_y:0.4
+                    padding_y:30
+                Label:
                     text:'Para:'
                     font_size:'20sp'
+                    size_hint_y:0.7
                 DropdownButton:
                     text:'Selecionar moeda para converter'
+                    font_size:'16sp'
                     id:moedapara
         BoxLayout:
             orientation:'vertical'
@@ -59,6 +73,7 @@
             padding: 150,10
             Botao:
                 text:'Converter o valor'
+                font_size:'30sp'
                 on_press: root.press()
         BoxLayout:
             orientation:'vertical'
@@ -66,3 +81,4 @@
             size_hint_y:0.3
             Label:
                 id:resultado
+                font_size:'30sp'

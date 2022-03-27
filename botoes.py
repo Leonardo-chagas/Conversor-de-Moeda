@@ -17,7 +17,7 @@ class DropdownButton(ButtonBehavior, Label):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.dropdown = CustomDropdown()
+        self.dropdown = DropDown()
         self.currencies = []
         with open('moedas.txt', encoding="utf8") as f:
             for line in f:
@@ -40,11 +40,16 @@ class DropdownButton(ButtonBehavior, Label):
         self.canvas.before.clear()
         with self.canvas.before:
             Color(rgba=self.cor1)
-            Ellipse(size=self.size, pos=self.pos)
+            Rectangle(size=self.size, pos=self.pos)
+            """ Ellipse(size=(self.height,self.height), pos=self.pos)
+            Ellipse(size=(self.height, self.height), 
+                pos=(self.x+self.width-self.height,self.y))
+            Rectangle(size=(self.width-self.height,self.height),
+                pos=(self.x+self.height/2.0,self.y)) """
 
     def AtualizarLista(self, *args):
         for option in self.currencies:
-            botao = Button(text=option['name'], size_hint_y=None, size=(30, 15))
+            botao = Button(text=option['name'], size_hint_y=None, height=30, font_size=15)
             botao.bind(on_release=lambda botao: self.Selecionar(botao.text))
             self.dropdown.add_widget(botao)
         #self.dropdown.bind(on_select = lambda instance, x: self.Selecionar(x['code'], x['name']))
@@ -86,4 +91,4 @@ class Botao(ButtonBehavior, Label):
         self.canvas.before.clear()
         with self.canvas.before:
             Color(rgba=self.cor1)
-            Ellipse(size=self.size, pos=self.pos)
+            Rectangle(size=self.size, pos=self.pos)
